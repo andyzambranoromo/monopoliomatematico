@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math-opoly - Monopolio Matemático</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Pantalla de Inicio -->
+        <div id="start-screen" class="screen active">
+            <div class="start-content">
+                <h1 class="main-logo">🎲 MATH-OPOLY 🎲</h1>
+                <p class="tagline">El juego de monopolio con desafíos matemáticos</p>
+                
+                <div class="mode-selection">
+                    <h2>Selecciona un modo de juego:</h2>
+                    
+                    <div class="mode-buttons">
+                        <button id="local-btn" class="mode-btn btn-local">
+                            <i class="fas fa-users"></i>
+                            <span>MODO LOCAL</span>
+                            <small>Juega en un solo dispositivo</small>
+                        </button>
+                        
+                        <button id="online-btn" class="mode-btn btn-online" disabled>
+                            <i class="fas fa-globe"></i>
+                            <span>MODO ONLINE</span>
+                            <small>Próximamente</small>
+                        </button>
+                    </div>
+                    
+                    <div class="start-game-btn">
+                        <button id="play-btn" class="btn-play">
+                            <i class="fas fa-play-circle"></i>
+                            COMENZAR JUEGO
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lobby Screen -->
+        <div id="lobby-screen" class="screen">
+            <div class="lobby-content">
+                <div class="lobby-header">
+                    <h1><i class="fas fa-cogs"></i> CONFIGURACIÓN DEL JUEGO</h1>
+                    <button id="back-to-menu" class="btn-back">
+                        <i class="fas fa-arrow-left"></i> Volver
+                    </button>
+                </div>
+                
+                <div class="game-mode-select">
+                    <h2>Modo de Juego:</h2>
+                    <div class="mode-options">
+                        <button class="game-mode-btn active" data-mode="quick">
+                            <i class="fas fa-bolt"></i>
+                            <span>RÁPIDO</span>
+                            <small>3 vueltas al tablero</small>
+                        </button>
+                        <button class="game-mode-btn" data-mode="normal">
+                            <i class="fas fa-trophy"></i>
+                            <span>NORMAL</span>
+                            <small>Juego completo</small>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="players-setup">
+                    <h2>Jugadores <span id="player-count">(2)</span></h2>
+                    
+                    <div class="players-list" id="players-list">
+                        <!-- Jugadores se agregarán aquí -->
+                    </div>
+                    
+                    <div class="player-controls">
+                        <button id="add-human" class="btn-add">
+                            <i class="fas fa-user-plus"></i> Agregar Jugador
+                        </button>
+                        <button id="add-bot" class="btn-add bot">
+                            <i class="fas fa-robot"></i> Agregar Bot
+                        </button>
+                        <button id="clear-players" class="btn-clear">
+                            <i class="fas fa-trash"></i> Limpiar
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="start-game-section">
+                    <button id="start-game-btn" class="btn-start">
+                        <i class="fas fa-play"></i> COMENZAR PARTIDA
+                    </button>
+                </div>
+            </div>
+        </div>
+       
+        <!-- Game Screen -->
+        <div id="game-screen" class="screen">
+            <div class="game-header">
+                <h2><i class="fas fa-dice"></i> MATH-OPOLY</h2>
+                <div class="game-info">
+                    <div class="turn-info">
+                        <span id="current-player-turn">Turno de: Jugador 1</span>
+                        <span id="game-mode-indicator">Modo: Rápido</span>
+                    </div>
+                    <div class="game-buttons">
+                        <button id="sell-btn" class="btn-sell">
+                            <i class="fas fa-money-bill-wave"></i> Vender
+                        </button>
+                        <button id="clear-log-btn" class="btn-clear-log">
+                            <i class="fas fa-trash"></i> Limpiar
+                        </button>
+                        <button id="back-to-lobby-btn" class="btn-back-game">
+                            <i class="fas fa-home"></i> Salir
+                        </button>
+                    </div>
+                </div>
+            </div>
+           
+            <div class="game-layout">
+                <!-- Panel izquierdo - Jugadores -->
+                <div class="left-panel" id="players-panel">
+                    <h3><i class="fas fa-users"></i> JUGADORES</h3>
+                    <div id="players-cards">
+                        <!-- Tarjetas de jugadores -->
+                    </div>
+                </div>
+               
+                <!-- Centro - Tablero -->
+                <div class="center-panel">
+                    <div class="board-container">
+                        <div class="dice-center">
+                            <h4>LANZA LOS DADOS</h4>
+                            <div class="dice-display">
+                                <div class="dice" id="dice1">?</div>
+                                <div class="dice" id="dice2">?</div>
+                            </div>
+                            <button id="roll-dice-btn" class="btn-roll">
+                                <i class="fas fa-dice"></i> LANZAR DADOS
+                            </button>
+                        </div>
+                        <div class="board" id="game-board">
+                            <!-- Tablero se genera aquí -->
+                        </div>
+                    </div>
+                </div>
+               
+                <!-- Panel derecho - Registro -->
+                <div class="right-panel" id="game-log">
+                    <div class="log-header">
+                        <h3><i class="fas fa-scroll"></i> REGISTRO</h3>
+                        <button id="clear-log-small" class="btn-clear-small">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                    <div class="log-content" id="log-content">
+                        <!-- Registro del juego -->
+                    </div>
+                </div>
+            </div>
+        </div>
+       
+        <!-- Results Screen -->
+        <div id="results-screen" class="screen">
+            <div class="results-content">
+                <h1 class="results-title">🏆 RESULTADOS FINALES 🏆</h1>
+                <div class="podium" id="podium">
+                    <!-- Podio se genera aquí -->
+                </div>
+                <button id="back-to-lobby-from-results" class="btn-play-again">
+                    <i class="fas fa-redo"></i> JUGAR DE NUEVO
+                </button>
+            </div>
+        </div>
+    </div>
+   
+    <!-- Modales -->
+    <div class="modal" id="property-modal">
+        <div class="modal-content">
+            <h2><i class="fas fa-home"></i> COMPRAR PROPIEDAD</h2>
+            <div id="property-info"></div>
+            <div class="math-question" id="math-question"></div>
+            <div class="modal-buttons">
+                <button id="buy-btn" class="btn-buy">COMPRAR</button>
+                <button id="decline-btn" class="btn-decline">NO COMPRAR</button>
+            </div>
+        </div>
+    </div>
+   
+    <div class="modal" id="sell-modal">
+        <div class="modal-content">
+            <h2><i class="fas fa-money-bill-wave"></i> VENDER PROPIEDAD</h2>
+            <div id="sell-info"></div>
+            <div class="modal-buttons">
+                <button id="confirm-sell-btn" class="btn-buy">VENDER (75%)</button>
+                <button id="cancel-sell-btn" class="btn-decline">CANCELAR</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="game.js"></script>
+</body>
+</html>
